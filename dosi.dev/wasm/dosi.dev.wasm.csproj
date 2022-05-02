@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Shared\dosi.dev.shared.csproj" />
+    <ProjectReference Include="..\shared\dosi.dev.shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
