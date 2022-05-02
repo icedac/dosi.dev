@@ -1,0 +1,22 @@
+﻿@page "/blog/{Path}"
+@inject MarkdownLoader Loader
+@inject IJSRuntime JS
+
+<div>
+    @((MarkupString)ContentValue)
+</div>
+
+@code {
+    private IJSObjectReference? module;
+    [Parameter]
+    public string? Path { get; set; }
+
+    protected string ContentValue { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        ContentValue = await Loader.Load($"/content/{Path}.md");
+        module = await JS.InvokeAsync<IJSObjectReference>( "import", "./Pages/Blog.razor.js");
+        module.InvokeVoidAsync("load");
+    }
+}

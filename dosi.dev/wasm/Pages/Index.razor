@@ -1,10 +1,18 @@
 ﻿@page "/"
+@inject MarkdownLoader Loader
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<div>
+    @((MarkupString)ContentValue)
+</div>
 
+@code
+{
+    protected string ContentValue { get; set; }
 
-<h2>
-dosi.dev
-</h2>
+    protected override async Task OnInitializedAsync()
+    {
+        ContentValue = await Loader.Load("/content/index.md");
+    }
+}
